@@ -93,18 +93,46 @@ export function labelAlign(angle: number, orient: AxisOrient): HorizontalAlign {
   if (orient === 'top' || orient === 'bottom') {
     if (angle % 180 === 0) {
       return 'center';
-    } else if (angle > 180) {
-      return orient === 'top' ? 'left' : 'right';
+    } else if (angle <= 45 || angle >= 315) {
+      if (angle <= 180) {
+        return orient === 'top' ? 'right' : 'left';
+      } else {
+        return orient === 'top' ? 'left' : 'right';
+      }
+    } else if (angle >= 135 && angle <= 225) {
+      if (angle <= 180) {
+        return orient === 'top' ? 'right' : 'left';
+      } else {
+        return orient === 'top' ? 'left' : 'right';
+      }
     } else {
-      return orient === 'top' ? 'right': 'left';
+      if (angle <= 180) {
+        return orient === 'top' ? 'right' : 'left';
+       } else {
+        return orient === 'top' ? 'left' : 'right';
+        }
     }
   } else {
     if (angle === 90 || angle === 270) {  // for 90 and 270
       return 'center';
-    } else if (angle < 90 || 270 < angle) {
-      return orient === 'left' ? 'right': 'left';
-    } else {
+    } else if (angle < 45 || angle >= 315) {
+      return orient === 'left' ? 'right' : 'left';
+    } else if (angle >= 135 && angle <= 225) {
       return orient === 'left' ? 'left' : 'right';
+    } else {
+      if (angle <= 180) {
+        if (angle <= 90) {
+          return orient === 'left' ? 'right' : 'left';
+        } else {
+          return orient === 'left' ? 'left' : 'right';
+        }
+      } else {
+        if (angle <= 270) {
+          return orient === 'left' ? 'left' : 'right';
+        } else {
+          return orient === 'left' ? 'right' : 'left';
+        }
+      }
     }
   }
 }
